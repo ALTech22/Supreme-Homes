@@ -1,0 +1,86 @@
+#   Welcome to supreme homes
+#   The current version is 0.0.1
+#   The atual features is: ilimited homes, default homes, and public homes
+#   ##################################################################################################SupHomes
+#   the "activate_limits" option is if you needs to set person number of sethomes for vip players
+#   the "substitution_of_homes" option allow the substitution of homes without the permissions
+#   ##################################################################################################SupHomes
+#   message is the plugins message if you need to translate and modify it
+#   The variables used is:
+#   {player} is the player used the command
+#   {home} the home of player
+#   {publichome} the public home
+#   {homeplayer} the player who owns the public home
+#   {time} is the time of cooldown
+#   ##################################################################################################SupHomes
+#   the "vipsLimits" only works if "activate_limits" is true, this limits the number of home for players, and enable the vip has more homes
+#   ##################################################################################################SupHomes
+#   The "delay_teleport" is if you need a time, in this version the time is 3 seconds
+activate_limits: true
+substitution_of_homes: true
+
+vipsLimits:
+    normalPlayer:
+       limitHomes: 5
+       onLimit:
+           - '&e|&2---------------------------------------------------'
+           - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+           - '&e|                                                   '
+           - '&e|     &cYou make the max homes with this vip tier        '
+           - '&e|   &cif you need more homes, buy the next vip tier   '
+           - '&e|&2---------------------------------------------------'
+    viptier1:
+       limitHomes: 10
+       onLimit: 
+           - '&e|&2---------------------------------------------------'
+           - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+           - '&e|                                                   '
+           - '&e|     &cYou make the max homes with this vip tier        '
+           - '&e|   &cif you need more homes, buy the next vip tier   '
+           - '&e|&2---------------------------------------------------'
+    viptier2:
+       limitHomes: 15
+       onLimit: 
+           - '&e|&2---------------------------------------------------'
+           - '&e|                  &9S&l&Oupreme &a&l&OHomes                    '
+           - '&e|                                                   '
+           - '&e|     &cYou make the max homes with this vip tier        '
+           - '&e|   &cif you need more homes, buy the next vip tier   '
+           - '&e|&2---------------------------------------------------'
+    viptier3:
+       limitHomes: 20
+       onLimit: 
+           - '&e|&2---------------------------------------------------'
+           - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+           - '&e|                                                   '
+           - '&e|     &cYou make the max homes with this vip tier        '
+           - '&e|   &cif you need more homes, buy the next vip tier   '
+           - '&e|&2---------------------------------------------------'
+    viptier4:
+       limitHomes: 25
+       onLimit: 
+          - '&e|&2----------------------------------------------------'
+          - '&e|                   &9&l&OSupreme &a&l&OHomes                   '
+          - '&e|                                                    '
+          - '&e|   &2You make the max homes in this server            '
+          - '&e|&aif you need more homes, detele the existents homes  '
+          - '&e|&2----------------------------------------------------'
+
+Delay_teleports: true
+
+Disabled_Worlds:
+    - 'Spawn'
+    - 'Shop'
+    - 'Spawn_Nether'
+
+messages: 
+    on_player_teleport: '&e{player} you has teleported to &2&l{home} '
+    on_player_teleport_public_home: '&e{player} you has teleported to &2&l{publichome}, &ea public home of player &2&l{homeplayer}'
+    on_player_delhome: '&eyour home &4&l{home} &4has been deleted'
+    on_player_delpublichome: '&eyour public home &4&l{publichome} &4has been deleted'
+    on_player_define_a_default_home: 'new &lhome &6defined with name: &a{home}'
+    on_player_define_a_public_home: 'new &lPUBLIC &6home defined with name: &a{publichome}'
+    player_homes: '&ethis is yours homes: '
+    player_on_see_homes: '&9Home name: &2&l{home}'
+    public_player_homes: '&ethis is all public homes of &2&l{homeplayer}'
+    public_player_on_see_homes: '&9Home name: &2&l{publichome}'

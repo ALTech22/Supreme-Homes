@@ -1,0 +1,77 @@
+name: SupremeHomes
+main: main.java.br.com.alsupreme.shomes.SupremeHomes
+version: 1.1.0
+api-version: 1.16
+description: A set homes plugin for your's servers, this plugin contain a public set homes too, very useful for player shops
+load: startup
+author: Andrey
+prefix: SHOMES
+
+commands:
+  sethome:
+    description: set your home, usage /sethome <name of home>
+    usage: /<command>
+    permission: suphomes.sethome
+  home:
+    description: teleport you to you home, usage /home <name of home>
+    usage: /<command>
+    permission: suphomes.home
+  homes:
+    description: show all your homes, usage /home
+    usage: /<command>
+    permission: suphomes.homes
+  delhome:
+    description: delete a home, usage /delhome <homename>
+    usage: /<command>
+    permission: suphomes.delhome
+  setphome:
+    description: set a public home, usage /setphome <name of home>
+    usage: /<command>
+    permission: suphomes.public.sethome
+  phome:
+    description: teleport you to a player home, usage /phome <name of player> <name of home>
+    usage: /<command>
+    permission: suphomes.public.home
+  phomes:
+    description: show all public homes of a player, usage /phomes <name of player>
+    usage: /<command>
+    permission: suphomes.public.homes
+  delphome:
+    description: delete a your public home, usage /delphome <homename>
+    usage: /<command>
+    permission: suphomes.public.delhome
+
+permissions:
+  suphomes.playeruse:
+    description: Allow player to use the default plugin commands
+    default: true
+    children:
+        suphomes.sethome: true
+        suphomes.home: true
+        suphomes.homes: true
+        suphomes.delhome: true
+
+  suphomes.playerusepublic:
+    description: Allow the players to use the public set homes
+    default: false
+    children:
+        suphomes.public.sethome: true
+        suphomes.public.home: true
+        suphomes.public.homes: true
+        suphomes.public.delhome: true
+
+  suphomes.vip.tier1:
+    description: Vip tier 1, increase the numbers of homes
+    default: false
+
+  suphomes.vip.tier2:
+    description: Vip tier 2, increase the numbers of homes
+    default: false
+
+  suphomes.vip.tier3:
+    description: Vip tier 3, increase the numbers of homes
+    default: false
+
+  suphomes.vip.tier4:
+    description: Vip tier 4, increase the numbers of homes
+    default: false
