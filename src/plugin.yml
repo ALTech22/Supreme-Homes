@@ -1,7 +1,8 @@
 name: SupremeHomes
 main: main.java.br.com.alsupreme.shomes.SupremeHomes
-version: 1.1.0
+version: 1.2
 api-version: 1.16
+softdepend: [Vault]
 description: A set homes plugin for your's servers, this plugin contain a public set homes too, very useful for player shops
 load: startup
 author: Andrey
@@ -24,20 +25,20 @@ commands:
     description: delete a home, usage /delhome <homename>
     usage: /<command>
     permission: suphomes.delhome
-  setphome:
-    description: set a public home, usage /setphome <name of home>
+  setpublichome:
+    description: set a public home, usage /setpublichome <name of home>
     usage: /<command>
     permission: suphomes.public.sethome
-  phome:
-    description: teleport you to a player home, usage /phome <name of player> <name of home>
+  publichome:
+    description: teleport you to a player home, usage /publichome <name of player> <name of home>
     usage: /<command>
     permission: suphomes.public.home
-  phomes:
-    description: show all public homes of a player, usage /phomes <name of player>
+  publichomes:
+    description: show all public homes of a player, usage /publichomes <name of player>
     usage: /<command>
     permission: suphomes.public.homes
-  delphome:
-    description: delete a your public home, usage /delphome <homename>
+  delpublichome:
+    description: delete a your public home, usage /delpublichome <homename>
     usage: /<command>
     permission: suphomes.public.delhome
 

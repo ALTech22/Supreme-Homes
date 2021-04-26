@@ -1,44 +1,64 @@
 package main.java.br.com.alsupreme.shomes;
 
+import java.io.File;
+
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 public abstract class SoundManager {
 	
-	static Sound home = Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
-	static Sound homes = Sound.BLOCK_BEEHIVE_ENTER;
-	static Sound sethome = Sound.ENTITY_PLAYER_LEVELUP;
-	static Sound delhome = Sound.BLOCK_NETHERITE_BLOCK_BREAK; 
-	static Sound error = Sound.ENTITY_PLAYER_BIG_FALL;
-	static Sound waitfortp = Sound.BLOCK_SOUL_SOIL_BREAK;
-	
+	static Plugin plugin = SupremeHomes.getPlugin(SupremeHomes.class);
+	static File soundsfile = new File (plugin.getServer().getPluginManager().getPlugin("SupremeHomes").getDataFolder(), "sounds.yml");
+	static FileConfiguration soundsconfig;
+
 	static float f1 = 0.5f;
 	static float f2 = 0.5f;
 	
 	public static void playSoundSetHome(Player player) {
 		
-		 player.playSound(player.getLocation(), sethome, f1, f2);
+		 player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("sethome")), f1, f2);
 	}
 	
 	public static void playSoundHome(Player player) {
-		 player.playSound(player.getLocation(), home, f1, f2);
+		 player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("home")), f1, f2);
 	}
 	
 	public static void playSoundHomes(Player player) {
-		 player.playSound(player.getLocation(), homes, f1, f2);
+		 player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("homes")), f1, f2);
 	}
 	
 	public static void playSoundDelhomes(Player player) {
-		 player.playSound(player.getLocation(), delhome, f1, f2);
+		 player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("delhome")), f1, f2);
 	}
 	
 	public static void playSoundError(Player player) {
-		player.playSound(player.getLocation(), error, f1, f2);
+		player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("error")), f1, f2);
 	}
 	
 	public static void playSoundWaitForTp(Player player) {
-		player.playSound(player.getLocation(), waitfortp, f1, f2);
+		player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("waitfortp")), f1, f2);
 	}
 	
 	//Soundconfig
-}
+	
+	public static void genSoundConfig() {
+		if(!soundsfile.exists()) {
+			plugin.saveResource("sounds.yml", false);
+			soundsconfig = YamlConfiguration.loadConfiguration(soundsfile);
+		}else {
+			reloadSoundConfig();
+		}
+	}
+	
+	public static void reloadSoundConfig() {
+		soundsconfig = YamlConfiguration.loadConfiguration(soundsfile);
+	}
+	
+	public static FileConfiguration getSoundConfigs() {
+		return soundsconfig;
+	}
+	
+	}

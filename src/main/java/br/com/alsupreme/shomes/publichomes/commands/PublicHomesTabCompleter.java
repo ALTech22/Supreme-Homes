@@ -15,7 +15,7 @@ public class PublicHomesTabCompleter implements TabCompleter {
 			Player player = (Player) sender;
 			String playername = player.getName();
 			
-			if(com.getName().equals("setphome")) {
+			if(com.getName().equals("setpublichome")) {
 				if(args.length == 1) {
 					List<String> tabSupremeHomes = new ArrayList<String>();
 					tabSupremeHomes.add("Complete with name of home");
@@ -23,7 +23,7 @@ public class PublicHomesTabCompleter implements TabCompleter {
 				}
 			}
 			
-			if(com.getName().equals("delphome")) {
+			if(com.getName().equals("delpublichome")) {
 				if(args.length == 1) {
 					List<String> TabSupremeHomes = new ArrayList<String>();
 					if(PublicHomesCommands.getHomes(playername)==null) {
@@ -35,7 +35,7 @@ public class PublicHomesTabCompleter implements TabCompleter {
 				}
 			}
 			
-			if(com.getName().equals("phome")) {
+			if(com.getName().equals("publichome")) {
 				
 				
 				if(args.length == 2) {

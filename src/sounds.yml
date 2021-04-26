@@ -1,0 +1,13 @@
+#      This config is for custom sounds for your server
+#      Change text for one in the list in this link for change the sound:
+#      https://dev.bukkit.org/projects/supreme-homes/pages/sound-list
+#
+#
+#
+
+home: ENTITY_EXPERIENCE_ORB_PICKUP
+homes: BLOCK_BEEHIVE_ENTER
+sethome: ENTITY_PLAYER_LEVELUP
+delhome: BLOCK_NETHERITE_BLOCK_BREAK
+error: ENTITY_PLAYER_BIG_FALL
+waitfortp: BLOCK_SOUL_SOIL_BREAK
