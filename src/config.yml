@@ -1,24 +1,27 @@
-#   Welcome to supreme homes
-#   The current version is 0.0.1
-#   The atual features is: ilimited homes, default homes, and public homes
+#   Welcome to supreme homes the best plugin of homes
 #   ##################################################################################################SupHomes
-#   the "activate_limits" option is if you needs to set person number of sethomes for vip players
-#   the "substitution_of_homes" option allow the substitution of homes without the permissions
-#   ##################################################################################################SupHomes
-#   message is the plugins message if you need to translate and modify it
-#   The variables used is:
-#   {player} is the player used the command
-#   {home} the home of player
-#   {publichome} the public home
-#   {homeplayer} the player who owns the public home
-#   {time} is the time of cooldown
-#   ##################################################################################################SupHomes
-#   the "vipsLimits" only works if "activate_limits" is true, this limits the number of home for players, and enable the vip has more homes
-#   ##################################################################################################SupHomes
-#   The "delay_teleport" is if you need a time, in this version the time is 3 seconds
-activate_limits: true
-substitution_of_homes: true
 
+
+#   the "activate_limits" option is if you needs to set person number of sethomes for vip players
+limited_homes: true
+
+#   "Cooldown" is the time wait for teleport in the /home
+Cooldown: 3
+
+#   The "delay_teleport" is if you need a time, in this version the time is 3 seconds, if it is "false" the teleport is immediate
+Delay_teleports: true
+
+#   "UseEconomy" is if you want to use the economic system and need the player pay to use the commands /sethome /home and /delhome
+UseEconomy: true
+
+Cancel_teleport_on_damage: true
+
+Disabled_Worlds:
+    - 'Spawn'
+    - 'Shop'
+    - 'Spawn_Nether'
+
+#   the "vipsLimits" only works if "activate_limits" is true, this limits the number of home for players, and enable the vip has more homes
 vipsLimits:
     normalPlayer:
        limitHomes: 5
@@ -66,12 +69,13 @@ vipsLimits:
           - '&e|&aif you need more homes, detele the existents homes  '
           - '&e|&2----------------------------------------------------'
 
-Delay_teleports: true
-
-Disabled_Worlds:
-    - 'Spawn'
-    - 'Shop'
-    - 'Spawn_Nether'
+#   message is the plugins message if you need to translate and modify it
+#   The variables used is:
+#   {player} is the player used the command
+#   {home} the home of player
+#   {publichome} the public home
+#   {homeplayer} the player who owns the public home
+#   {time} is the time of cooldown (in seconds)
 
 messages: 
     on_player_teleport: '&e{player} you has teleported to &2&l{home} '
@@ -80,7 +84,14 @@ messages:
     on_player_delpublichome: '&eyour public home &4&l{publichome} &4has been deleted'
     on_player_define_a_default_home: 'new &lhome &6defined with name: &a{home}'
     on_player_define_a_public_home: 'new &lPUBLIC &6home defined with name: &a{publichome}'
+    on_cancel_teleport_because_take_damage: '&4You take damage! &6teleport canceled'
     player_homes: '&ethis is yours homes: '
     player_on_see_homes: '&9Home name: &2&l{home}'
     public_player_homes: '&ethis is all public homes of &2&l{homeplayer}'
     public_player_on_see_homes: '&9Home name: &2&l{publichome}'
+    waiting_for_teleport: '&ewait &l{time} &eseconds'
+titles:
+    on_player_teleport: 'You has been teleported to: {home}'
+    on_player_del_a_home: 'Home {home} has been deleted'
+    on_player_set_a_home: 'New Home {home}'
+    on_error: 'Command failed'
