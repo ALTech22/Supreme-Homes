@@ -1,0 +1,14 @@
+#This is the price for /sethome
+sethomePrice: 1000
+#This is the price for /home
+homePrice: 0
+#This is the price for /delhome
+delhomePrice: 0
+
+messages:
+#message if player not have money
+   notHaveMoney: '&4you not have money, &6needs {price} for this'
+#message if player pay the home
+   succefullPayment: '&2you pay {price} for this'
+#message if player receive money
+   succefullReceivement: '&2you receive {price} for this'

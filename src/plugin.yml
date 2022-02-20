@@ -1,0 +1,22 @@
+main: supreme.andrey.homes.SupremeHomes
+name: 'SupremeHomes2.0'
+version: '2.0ALPHA'
+api: '1.16'
+
+commands:
+  sethome:
+    description: set your home, usage /sethome <name of home>
+    usage: /<command>
+    permission: suphomes.sethome
+  home:
+    description: teleport you to you home, usage /home <name of home>
+    usage: /<command>
+    permission: suphomes.home
+  homes:
+    description: show all your homes, usage /home
+    usage: /<command>
+    permission: suphomes.homes
+  delhome:
+    description: delete a home, usage /delhome <homename>
+    usage: /<command>
+    permission: suphomes.delhome
