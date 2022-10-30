@@ -46,4 +46,9 @@ public class EconomyKit {
 		}
 	}
 	
+	public static String getCurrencyName() {
+		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
+		return economyProvider.getProvider().currencyNamePlural();
+	}
+	
 }

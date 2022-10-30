@@ -1,1 +1,21 @@
-#config hehe
+
+Active_Bstats_Metrics: true
+
+home_command:
+ delay: true #If false, the teleport run instantly
+ delay_time: 5 #The delay to teleport to home
+ 
+ 
+limit:
+ isActive: true
+ max_homes: 10
+ message:
+  - '&e|&2---------------------------------------------------'
+  - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+  - '&e|                                                   '
+  - '&e|     &cYou make the max homes with this vip tier        '
+  - '&e|   &cif you need more homes, buy the next vip tier   '
+  - '&e|&2---------------------------------------------------'
+
+
+lang: 'EN_US' #NOT IMPLEMENTED YET

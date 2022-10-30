@@ -20,6 +20,10 @@ public class Commands implements CommandExecutor{
 				Home.home(player, args);
 			else if(com.getName().equals("delhome"))
 				Home.delHome(player, args);
+			else if(com.getName().equals("setpublic"))
+				Home.setPublic(player, args);
+			else if(com.getName().equals("unsetpublic"))
+				Home.unsetPublic(player, args);
 			
 		}
 		return true;

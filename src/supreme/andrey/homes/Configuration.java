@@ -47,7 +47,7 @@ public class Configuration {
 		if(!(file.exists())) {
 			if(isPreGenerated) {
 				
-				plugin.saveResource(filePath, false);
+				plugin.saveResource(fileName, false);
 			}else {
 				try {
 					new File(plugin.getDataFolder(), this.filePath).mkdirs();

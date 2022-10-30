@@ -1,7 +1,8 @@
 main: supreme.andrey.homes.SupremeHomes
-name: 'SupremeHomes2.0'
+name: 'SupremeHomes2'
 version: '2.0ALPHA'
 api: '1.16'
+api-version: '1.16'
 
 commands:
   sethome:
@@ -20,3 +21,36 @@ commands:
     description: delete a home, usage /delhome <homename>
     usage: /<command>
     permission: suphomes.delhome
+  setpublic:
+    description: set a home as public, other players can access
+    usage: /<command>
+    permission: suphomes.public
+  unsetpublic:
+    description: set a public home as private
+    usage: /<command>
+    permission: suphomes.public
+  show:
+    description: show players home in a GUI
+    usage: /<command>
+    permission: suphomes.show
+ # test:
+  # usage: /<command>
+    
+permissions:
+  suphomes.player:
+   description: 'Allow the defaults home command to players (sethome home homes and delhome)'
+   default: true
+   children:
+    suphomes.sethome: true
+    suphomes.home: true
+    suphomes.homes: true
+    suphomes.delhome: true
+  suphomes.admin:
+   description: 'Allow some admin tools for server admin'
+   default: op
+   children:
+    suphomes.show: true
+  
+    
+    
+    

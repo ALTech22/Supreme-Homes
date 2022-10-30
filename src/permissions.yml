@@ -1,0 +1,27 @@
+viptier1:
+ limitHomes: 10
+ message: 
+   - '&e|&2---------------------------------------------------'
+   - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+   - '&e|                                                   '
+   - '&e|     &cYou make the max homes with this vip tier        '
+   - '&e|   &cif you need more homes, buy the next vip tier   '
+   - '&e|&2---------------------------------------------------'
+viptier2:
+ limitHomes: 15
+ message: 
+  - '&e|&2---------------------------------------------------'
+  - '&e|                  &9S&l&Oupreme &a&l&OHomes                    '
+  - '&e|                                                   '
+  - '&e|     &cYou make the max homes with this vip tier        '
+  - '&e|   &cif you need more homes, buy the next vip tier   '
+  - '&e|&2---------------------------------------------------'
+viptier3:
+ limitHomes: 20
+ message: 
+  - '&e|&2---------------------------------------------------'
+  - '&e|                  &9&l&OSupreme &a&l&OHomes                    '
+  - '&e|                                                   '
+  - '&e|     &cYou make the max homes with this vip tier        '
+  - '&e|   &cif you need more homes, buy the next vip tier   '
+  - '&e|&2---------------------------------------------------'

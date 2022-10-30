@@ -17,6 +17,10 @@ public abstract class SoundManager {
 	static float f1 = 0.5f;
 	static float f2 = 0.5f;
 	
+	public static void playSoundSetPublic(Player player) {
+		player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("setpublic")), f1, f2);
+	}
+	
 	public static void playSoundSetHome(Player player) {
 		
 		 player.playSound(player.getLocation(), Sound.valueOf(getSoundConfigs().getString("sethome")), f1, f2);
