@@ -13,7 +13,7 @@ public class Configuration {
 	private String filePath;
 	private String fileName;
 	private boolean isPreGenerated;
-	
+	 
 	public Configuration(Plugin plugin, String filePath, String fileName, boolean ispregenerated) {
 		this.plugin = plugin;
 		this.filePath = filePath;
@@ -41,13 +41,15 @@ public class Configuration {
 	
 	public FileConfiguration getConfig() {
 		return fileConfiguration;
-	}
+	} 
 	
 	private void genFile() {
 		if(!(file.exists())) {
 			if(isPreGenerated) {
-				
-				plugin.saveResource(fileName, false);
+				System.out.println("filepath");
+				System.out.println(this.filePath);
+				String path = this.filePath != "" ? this.filePath + "/" : "";
+				plugin.saveResource(path + fileName, false);
 			}else {
 				try {
 					new File(plugin.getDataFolder(), this.filePath).mkdirs();

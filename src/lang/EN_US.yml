@@ -1,0 +1,41 @@
+#This file is for language, change if you need to adapt the messages
+home:
+ on_teleport: "Teleported to {homeName}" #Variables: {homeName}
+ sethome_incorrect: "Correct use is: /sethome <home_name>"
+ sethome_error: "Error on sethome"
+ sethome_error_home_named_public: "Unable to set a home named as 'public'"
+ sethome_success: "New home: {homeName}" #Variables: {homeName} 
+ sethome_update_success: "Home {homeName} updated" #Variables: {homeName}
+ home_incorrect: "Command incorrect, use '/home public <home_name>' to teleport to other player's home"
+ home_not_exists: "Home not exists"
+ home_wait_teleport: "Wait your teleport has been done"
+ homes_not_have_homes: "You not have any home, use the /sethome <home_name> to set a new home"
+ homes_your_homes: "&7Your homes: "
+ homes_home: "&9{home}" #Variables: {home}
+ delhome_home_not_exists: "Home not exists"
+ delhome_success: "Home {homeName} deleted" #Variables {homeName}
+ delhome_incorrect: "Correct use is: /delhome <home_name>"
+ 
+ 
+ public: 
+  on_teleport: "Teleported to {homeName} of {playerName}" #Variables: {homeName} {playerName}
+  home_incorrect: "Command incorrect, use '/home public <home_name>' to teleport to other player's home"
+  home_not_exists: "Home not exists"
+  setpublic_not_have_selected_home: "You must set a home with /sethome <home_name> before set public"
+  setpublic_success: "new public home: {homeName}"
+  setpublic_incorrect: "Correct use is: /setpublic <home_name>"
+  unsetpublic_success: "Unseted public: {homeName}"
+  unsetpublic_incorrect: "Correct use is: /unsetpublic <home_name>"
+
+economy:
+#message if player not have money
+  not_have_money: '&4you not have money, &6needs {price} for this' #Variables: {price}
+#message if player pay the home
+  successful_payment: '&2you pay {price} for this' #Variables: {price}
+ 
+delayed_teleport:
+  waiting: "Wait {seconds} seconds" #Variables {seconds}
+  cancel: "Click here to cancel!"
+  cancel_hover: "&4Cancel Teleport"
+  success_cancel: "Teleport cancelled"
+ 

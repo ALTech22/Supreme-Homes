@@ -8,11 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import supreme.andrey.homes.SupremeHomes;
 import supreme.andrey.homes.utils.GUICreator;
 
 public class HomePlayersGui {
-	private static ArrayList<String> loadHomesFilesName() {
-		File[] directorys = new File(Bukkit.getPluginManager().getPlugin("SupremeHomes2.0").getDataFolder().getPath() + "/homes").listFiles();
+	private static ArrayList<String> loadHomesFilesName(SupremeHomes sh) {
+		File[] directorys = new File(Bukkit.getPluginManager().getPlugin(sh.getName()).getDataFolder().getPath() + "/homes").listFiles();
 		ArrayList<String> fileName = new ArrayList<String>();
 		for(File file : directorys) {
 			String name = file.getName();
@@ -22,9 +23,9 @@ public class HomePlayersGui {
 		return fileName;
 	}
 	
-	private static ArrayList<ItemStack> genFileItem() {
+	private static ArrayList<ItemStack> genFileItem(SupremeHomes sh) {
 		ArrayList<ItemStack> itens = new ArrayList<ItemStack>();
-		for(String name : loadHomesFilesName()) {
+		for(String name : loadHomesFilesName(sh)) {
 			ItemStack item = new ItemStack(Material.YELLOW_BED);
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(name);
@@ -34,11 +35,11 @@ public class HomePlayersGui {
 		return itens;
 	}
 	
-	public static GUICreator genInventory(String title, Integer slots, Player player) {
+	public static GUICreator genInventory(String title, Integer slots, Player player, SupremeHomes sh) {
 		
 		GUICreator gui = new GUICreator(title, slots, null, player);
 		Integer actualSlot = 1;
-		for (ItemStack item : genFileItem()) {
+		for (ItemStack item : genFileItem(sh)) {
 			gui.putItemInInventory(actualSlot, item);
 			actualSlot+=2;
 		}

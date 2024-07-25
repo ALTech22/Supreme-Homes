@@ -1,8 +1,12 @@
 main: supreme.andrey.homes.SupremeHomes
 name: 'SupremeHomes2'
-version: '2.0ALPHA'
+version: '2.2.0'
 api: '1.16'
 api-version: '1.16'
+description: A set homes plugin for your's servers, this plugin contain a public set homes too, very useful for player shops
+author: Andrey H. (Supreme)
+softdepend:
+  - "Vault"
 
 commands:
   sethome:
@@ -24,11 +28,11 @@ commands:
   setpublic:
     description: set a home as public, other players can access
     usage: /<command>
-    permission: suphomes.public
+    permission: suphomes.public.set
   unsetpublic:
     description: set a public home as private
     usage: /<command>
-    permission: suphomes.public
+    permission: suphomes.public.unset
   show:
     description: show players home in a GUI
     usage: /<command>
@@ -45,6 +49,13 @@ permissions:
     suphomes.home: true
     suphomes.homes: true
     suphomes.delhome: true
+  suphomes.public:
+    description: 'Allow player to set your homes to public or private'
+    default: true
+    children:
+     suphomes.public.set: true
+     suphomes.public.unset: true
+     
   suphomes.admin:
    description: 'Allow some admin tools for server admin'
    default: op

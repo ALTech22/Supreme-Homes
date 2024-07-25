@@ -1,6 +1,5 @@
-package supreme.andrey.homes.admin.tools.events;
+package supreme.andrey.homes.player.tools.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,7 +7,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import supreme.andrey.homes.SupremeHomes;
 import supreme.andrey.homes.admin.tools.GUIManager.HomeGui;
-import supreme.andrey.homes.player.tools.HomeTeleport;
 import supreme.andrey.homes.utils.GUICreator;
 
 public class Events implements Listener{
@@ -26,14 +24,14 @@ public class Events implements Listener{
 			return;
 		
 		Player player = (Player) e.getWhoClicked();
-		if (SupremeHomes.playerAdminInventoryEvent.containsKey(player)) {
+		if (SupremeHomes.playerInventoryEvent.containsKey(player)) {
 			if(e.getInventory().firstEmpty() == 0) {
 				player.closeInventory();
 				String playerName = e.getCurrentItem().getItemMeta().getDisplayName();
 				GUICreator gui = HomeGui.genInventory(playerName, 9*6, player, playerName, 1, sh);
-				gui.openInventory(true);
+				gui.openInventory(false);
 			}
-			 
+			
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Next Page")) {
 				player.closeInventory();
 				String playerName = player.getName();
@@ -42,7 +40,7 @@ public class Events implements Listener{
 				Integer currentPage = Integer.valueOf(CPage);
 				GUICreator gui = HomeGui.genInventory(playerName, 9*6, player, playerName, currentPage+1, sh);
 
-				gui.openInventory(true);
+				gui.openInventory(false);
 			} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Previous page")) {
 				player.closeInventory();
 				String playerName = player.getName();
@@ -51,14 +49,7 @@ public class Events implements Listener{
 				Integer currentPage = Integer.valueOf(CPage);
 				GUICreator gui = HomeGui.genInventory(playerName, 9*6, player, playerName, currentPage-1, sh);
 
-				gui.openInventory(true);
-			} else if (e.getInventory().firstEmpty() != 0) {
-
-				String inventoryPlayer = e.getView().getTitle();
-				String homeName = e.getCurrentItem().getItemMeta().getDisplayName();
-				System.out.println(inventoryPlayer+"/"+homeName);
-				HomeTeleport.teleportPlayer(player, homeName, sh, inventoryPlayer);
-				player.closeInventory();
+				gui.openInventory(false);
 			}
 			
 			e.setCancelled(true);
@@ -69,8 +60,8 @@ public class Events implements Listener{
 	public void closeInventoryEvent(InventoryCloseEvent e) {
 		Player player = (Player) e.getPlayer();
 		
-		if (SupremeHomes.playerAdminInventoryEvent.containsKey(player)) {
-			SupremeHomes.playerAdminInventoryEvent.remove(player);
+		if (SupremeHomes.playerInventoryEvent.containsKey(player)) {
+			SupremeHomes.playerInventoryEvent.remove(player);
 		}
 	}
 }
