@@ -3,25 +3,22 @@ package supreme.andrey.homes.permission;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import supreme.andrey.homes.Configuration;
 
 public class PermissionManager {
-	private Player player;
 	private Plugin plugin;
 	private Configuration config;
 	
-	public PermissionManager(Player player, Plugin plugin) {
+	public PermissionManager(Plugin plugin) {
 		super();
-		this.player = player;
-		this.plugin = plugin;
+		this.setPlugin(plugin);
 		this.config = new Configuration(plugin, "", "permissions", true);
 	}
 	
-	public Permission getPlayerPermission() {
+	public Permission getPlayerPermission(Player player) {
 		Set<String> keys = config.getConfig().getKeys(false);
 		
 		for (String key : keys) {
@@ -35,6 +32,14 @@ public class PermissionManager {
 		}
 		
 		return null;
+	}
+
+	public Plugin getPlugin() {
+		return plugin;
+	}
+
+	public void setPlugin(Plugin plugin) {
+		this.plugin = plugin;
 	}
 	
 }

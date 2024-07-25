@@ -16,12 +16,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import supreme.andrey.homes.SupremeHomes;
 import supreme.andrey.homes.utils.GUICreator;
 
 public class HomeGui {
 	
-	private static Map<String, ArrayList<String>> loadHomesData(String playerName) {
-		File fileHomes = new File(Bukkit.getPluginManager().getPlugin("SupremeHomes2.0").getDataFolder().getPath(), "homes/" + playerName + ".yml");
+	private static Map<String, ArrayList<String>> loadHomesData(String playerName, SupremeHomes sh) {
+		File fileHomes = new File(Bukkit.getPluginManager().getPlugin(sh.getName()).getDataFolder().getPath(), "homes/" + playerName + ".yml");
 		FileConfiguration fcHomes = YamlConfiguration.loadConfiguration(fileHomes);
 		Map<String, ArrayList<String>> homeData = new HashMap<String, ArrayList<String>>();
 		Set<String> homesSet = fcHomes.getKeys(false);
@@ -40,9 +41,9 @@ public class HomeGui {
 		return homeData;
 	}
 	
-	private static ArrayList<ItemStack> genFileItem(String playerName) {
+	private static ArrayList<ItemStack> genFileItem(String playerName, SupremeHomes sh) {
 		ArrayList<ItemStack> itens = new ArrayList<ItemStack>();
-		Map<String, ArrayList<String>> homes = loadHomesData(playerName);
+		Map<String, ArrayList<String>> homes = loadHomesData(playerName, sh);
 		Set<String> homeName = homes.keySet();
 		for(String name : homeName) {
 			
@@ -78,10 +79,10 @@ public class HomeGui {
 		return itens;
 	}
 	
-	public static GUICreator genInventory(String title, Integer slots, Player player, String playerName, @Nullable Integer arg) {
+	public static GUICreator genInventory(String title, Integer slots, Player player, String playerName, @Nullable Integer arg, SupremeHomes sh) {
 		GUICreator gui = new GUICreator(title, slots, null, player);
 		Integer actualSlot = 0;
-		ArrayList<ItemStack> itens = genFileItem(playerName);
+		ArrayList<ItemStack> itens = genFileItem(playerName, sh); 
 		
 		Integer pageToShow = arg;
 

@@ -1,0 +1,40 @@
+#This file is for language, change if you need to adapt the messages
+home:
+ on_teleport: "Teleportado para {homeName}" #Variables: {homeName}
+ sethome_incorrect: "Uso correto: /sethome <home_name>"
+ sethome_error: "Erro ao realizar /sethome"
+ sethome_error_home_named_public: "Impossível criar home com nome 'public'"
+ sethome_success: "Nova home: {homeName}" #Variables: {homeName} 
+ sethome_update_success: "Home {homeName} atualizada" #Variables: {homeName}
+ home_incorrect: "Comando incorreto, use '/home <home_name>' para se teleportar"
+ home_not_exists: "Home não existe"
+ home_wait_teleport: "Espere o teleporte terminar"
+ homes_not_have_homes: "Você ainda não possui homes, use /sethome <home_name> para criar uma"
+ homes_your_homes: "&7Homes: "
+ homes_home: "&9{home}" #Variables: {home}
+ delhome_home_not_exists: "Home não existe"
+ delhome_success: "Home {homeName} deletada" #Variables {homeName}
+ delhome_incorrect: "Uso correto: /delhome <home_name>"
+ 
+ 
+ public: 
+  on_teleport: "Teleportado para home {homeName} do jogador {playerName}" #Variables: {homeName} {playerName}
+  home_incorrect: "Comando incorreto, use '/home public <player_name> <home_name>' para se teleportar para home de outro jogador"
+  home_not_exists: "Home não existe"
+  setpublic_not_have_selected_home: "Necessário criar home com /sethome <home_name> antes de torna-la publica"
+  setpublic_success: "Nova home publica: {homeName}"
+  setpublic_incorrect: "Uso correto: /setpublic <home_name>"
+  unsetpublic_success: "Removido acesso publico da {homeName}"
+  unsetpublic_incorrect: "Uso correto: /unsetpublic <home_name>"
+
+economy:
+#message if player not have money
+  not_have_money: '&4Você não tem dinheiro o suficiente, &6faltam {price}'
+#message if player pay the home
+  successful_payment: '&Você pagou {price}'
+
+delayed_teleport:
+  waiting: "Espere {seconds} segundos" #Variables {seconds}
+  cancel: "Clique aqui para cancelar!"
+  cancel_hover: "&4Cancelar teleporte"
+  success_cancel: "Teleporte cancelado"

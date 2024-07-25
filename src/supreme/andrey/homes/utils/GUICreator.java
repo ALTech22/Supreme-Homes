@@ -13,8 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
-
 import supreme.andrey.homes.SupremeHomes;
 
 
@@ -60,8 +58,9 @@ public class GUICreator implements Listener{
 		}
 
 	}
-	public void openInventory() {
-		SupremeHomes.playerInventoryEvent.put(player, inventory);
+	public void openInventory(boolean isAdmin) {
+		if (isAdmin) SupremeHomes.playerAdminInventoryEvent.put(player, inventory);
+		else SupremeHomes.playerInventoryEvent.put(player, inventory);
 		player.openInventory(inventory); 
 	}
 	

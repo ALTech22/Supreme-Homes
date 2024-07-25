@@ -16,13 +16,14 @@ import supreme.andrey.homes.events.definitions.OnPlayerSetNewHome;
 import supreme.andrey.homes.events.definitions.OnPlayerSetPublicHome;
 import supreme.andrey.homes.events.definitions.OnPlayerUnsetPublicHome;
 import supreme.andrey.homes.permission.Permission;
-import supreme.andrey.homes.permission.PermissionManager;
+import supreme.andrey.homes.utils.ClassUtils;
+import supreme.andrey.homes.utils.HomeVariables;
+import supreme.andrey.homes.utils.SpigotUtils;
 import supreme.andrey.homes.utils.Teleport;
 import supreme.andrey.homes.utils.runnable.Delayed_Teleport;
 
 public class Home {
 	private static Plugin plugin = SupremeHomes.getPlugin(SupremeHomes.class);
-	private static HashMap<Player, Delayed_Teleport> teleportPlayerMap = new HashMap<Player, Delayed_Teleport>();
 	
 	private static void showMessage(Player player) {
 		@SuppressWarnings("unchecked")
@@ -49,8 +50,7 @@ public class Home {
 	}
 	
 	private static boolean checkIfIsInLimit(Player player, String homeName) {
-		PermissionManager pm = new PermissionManager(player, plugin);
-		Permission permission = pm.getPlayerPermission();
+		Permission permission = SupremeHomes.getPermissions(player);
 		Configuration config = new Configuration(plugin, "homes/", player.getName(), false);
 		int currentNHomes = config.getConfig().getKeys(false).size() + 1;
 		
@@ -90,7 +90,7 @@ public class Home {
 		// /sethome <homename>
 		if(args.length == 1) {
 			if(args[0].equals("public")) {
-				player.sendMessage("Unable to set a home with name 'public'");
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("sethome_error_home_named_public"));
 				return;
 			}
 
@@ -101,8 +101,9 @@ public class Home {
 			double y = player.getLocation().getY();
 			double z = player.getLocation().getZ();
 			Configuration config = new Configuration(plugin, "homes/", playerName, false);
+			boolean isUpdating = isUpdatingAHome(homeName, player);
 			
-			if (checkIfIsInLimit(player, homeName) && !isUpdatingAHome(homeName, player)) {
+			if (checkIfIsInLimit(player, homeName) && !isUpdating) {
 				return;
 			}
 			
@@ -122,14 +123,22 @@ public class Home {
 					config.saveConfig();
 					config.reloadConfig();
 					SoundManager.playSoundSetHome(player);
-					player.sendMessage("new home: "+homeName+" defined");
+					String[] variables = {
+							"{homeName}"
+					};
+					String[] values = {
+							homeName
+					};
+					
+					if (isUpdating) player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("sethome_update_success", variables, values));
+					else player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("sethome_success", variables, values));
 				}
 			}catch (Exception e) {
 				System.out.println(e);
-				player.sendMessage("error on sethome");
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("sethome_error"));
 			}
 		}else {
-			player.sendMessage("Correct use is: /sethome <homename>");
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("sethome_incorrect"));
 		}
 	}
 	
@@ -140,7 +149,7 @@ public class Home {
 			if(args.length == 1) {
 				homeName = args[0];
 				if(homeName.equals("public")) {
-					player.sendMessage("Correct usage is: /home public <player_name> <home_name>");
+					player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("home_incorrect"));
 					return;
 				}
 			} else if(args.length == 3) {
@@ -148,7 +157,7 @@ public class Home {
 				playerHome = args[1];
 				Configuration config = new Configuration(plugin, "homes/", playerHome, false);
 				if(!config.getConfig().getBoolean(homeName + ".public")) {
-					player.sendMessage("Home not exists");
+					player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("home_not_exists"));
 					return;
 				}
 			}
@@ -156,33 +165,35 @@ public class Home {
 				if(args[0].equals("public") && args.length == 3) {
 					
 					Teleport.teleportPlayerToPublicHome(homeName, player, playerHome, plugin);
-				} else if (args.length == 1){
+				} else if (args[0].equals("public")) {
+					player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("home_incorrect"));
+				} else if (args.length == 1) {
 					Bukkit.getConsoleSender().sendMessage(homeName + "-" + playerHome); 
-					Teleport.teleportPlayer(homeName, player, plugin);
+					Teleport.teleportPlayer(player, homeName, player.getName(), plugin);
 				}
 			} else {
 				int delay_time = plugin.getConfig().getInt("home_command.delay_time");
 				if(args[0].equals("public") && args.length == 3) {
-					if(!teleportPlayerMap.containsKey(player)) {
-						teleportPlayerMap.put(player, new Delayed_Teleport(plugin, playerHome, homeName, player, delay_time));
-						teleportPlayerMap.get(player).runTaskTimer(plugin, 0, 20);
+					if(!HomeVariables.getTeleportPlayerMap().containsKey(player)) {
+						HomeVariables.getTeleportPlayerMap().put(player, new Delayed_Teleport(plugin, playerHome, homeName, player, delay_time));
+						HomeVariables.getTeleportPlayerMap().get(player).runTaskTimer(plugin, 0, 20);
 					} else {
-						player.sendMessage("Wait your teleport has been done");
+						player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("home_wait_teleport"));
 					}
 				} else {
 					
-					if(!teleportPlayerMap.containsKey(player)) {
-						teleportPlayerMap.put(player, new Delayed_Teleport(plugin, homeName, player, delay_time));
-						teleportPlayerMap.get(player).runTaskTimer(plugin, 0, 20);
+					if(!HomeVariables.getTeleportPlayerMap().containsKey(player)) {
+						HomeVariables.getTeleportPlayerMap().put(player, new Delayed_Teleport(plugin, homeName, player, delay_time));
+						HomeVariables.getTeleportPlayerMap().get(player).runTaskTimer(plugin, 0, 20);
 					} else {
-						player.sendMessage("Wait your teleport has been done");
+						player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("home_wait_teleport"));
 					}
 				}
 				
 				
 			}
 		}else {
-			player.sendMessage("Correct use is: /sethome <homename>");
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("home_incorrect"));
 		}
 	}
 	
@@ -190,49 +201,82 @@ public class Home {
 		Configuration config = new Configuration(plugin, "homes/", player.getName(), false);
 		Set<String> homes = config.getConfig().getKeys(false);
 		if(homes.isEmpty()) {
-			player.sendMessage("you not have any home, use the /sethome <homename> to set a new home");
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_not_have_homes"));
 			return;
 		}
-		player.sendMessage(ChatColor.DARK_PURPLE + "Your homes: ");
+		player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_your_homes"));
 		for(String home : homes) {
-			player.sendMessage(home);
+			String[] variables = {"{home}"};
+			String[] values = {home};
+			if (ClassUtils.classExists("net.md_5.bungee.api.chat.HoverEvent"))
+				SpigotUtils.teleportInHomeMessage(player, SupremeHomes.getLanguage().getHomeMessage("homes_home", variables, values), home);
+			else
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_home", variables, values));
 		}
 		SoundManager.playSoundHomes(player);
 			
 	}
 	
 	public static void delHome(Player player, String args[]) {
+		System.out.println(args.length);
+		if (args.length < 1) {
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("delhome_incorrect"));
+			return;
+		}
 		Configuration config = new Configuration(plugin, "homes/", player.getName(), false);
-		String homeName = args[0];
-		
-		config.getConfig().set(homeName, null);
-		config.saveConfig();
-		config.reloadConfig();
-		SoundManager.playSoundHome(player);
-		player.sendMessage(homeName + " deletado com sucesso");
+		for (int i=0; i<args.length; i++) {
+			String homeName = args[i];
+			
+			
+			if (config.getConfig().get(homeName) == null) {
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("delhome_home_not_exists"));
+				continue;
+			}
+			
+			config.getConfig().set(homeName, null);
+			config.saveConfig();
+			config.reloadConfig();
+			SoundManager.playSoundHome(player);
+			String[] variables = {"{homeName}"};
+			String[] values = {homeName};
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("delhome_success", variables, values));
+		}
 	}
 	
 	public static void setPublic(Player player, String args[]) {
 		String playerName = player.getName();
+		if (args.length != 1) {
+			player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("setpublic_incorrect"));
+			return;
+		}
 		String homeName = args[0];
 		Configuration config = new Configuration(plugin, "homes/", playerName, false);
 		OnPlayerSetPublicHome e = new OnPlayerSetPublicHome(player);
 		
+		if (!config.getConfig().contains(homeName)) {
+			player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("setpublic_not_have_selected_home"));
+			return;
+		}
 		
 		Bukkit.getPluginManager().callEvent(e);
 		
 		if (!e.isCancelled()) {
-		
 			config.getConfig().set(homeName + ".public", true);
 			config.saveConfig();
 			config.reloadConfig();
 			SoundManager.playSoundSetHome(player);
-			player.sendMessage("new public home: "+homeName);
+			String[] variables = {"{homeName}"};
+			String[] values = {homeName};
+			player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("setpublic_success", variables, values));
 		}
 	}
 	
 	public static void unsetPublic(Player player, String args[]) {
 		String playerName = player.getName();
+		if (args.length != 1) {
+			player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("unsetpublic_incorrect"));
+			return;
+		}
 		String homeName = args[0];
 		Configuration config = new Configuration(plugin, "homes/", playerName, false);
 		OnPlayerUnsetPublicHome e = new OnPlayerUnsetPublicHome(player);
@@ -245,12 +289,12 @@ public class Home {
 			config.saveConfig();
 			config.reloadConfig();
 			SoundManager.playSoundSetHome(player);
-			player.sendMessage("unseted public: "+homeName);
+			String[] variables = {"{homeName}"};
+			String[] values = {homeName};
+			player.sendMessage(SupremeHomes.getLanguage().getHomePublicMessage("unsetpublic_success", variables, values));
 		}
 	}
 	
-	public static HashMap<Player, Delayed_Teleport> getTeleportPlayerMap(){
-		return teleportPlayerMap;
-	}
+
 
 }

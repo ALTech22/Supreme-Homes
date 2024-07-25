@@ -1,5 +1,8 @@
 
-Active_Bstats_Metrics: true
+Active_Bstats_Metrics: true #Some metrics for plugin usage stastics, please set this 'true"
+# If you want to see the metrics, it's public :), just access this link: https://bstats.org/plugin/bukkit/Supreme%20Homes/10590
+
+active_economy: true #Active this if you want players pay to use the home
 
 home_command:
  delay: true #If false, the teleport run instantly
@@ -18,4 +21,4 @@ limit:
   - '&e|&2---------------------------------------------------'
 
 
-lang: 'EN_US' #NOT IMPLEMENTED YET
+lang: 'EN_US' #Available languages: EN_US and PT_BR
