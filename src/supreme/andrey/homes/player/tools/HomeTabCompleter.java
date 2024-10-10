@@ -63,6 +63,11 @@ public class HomeTabCompleter implements TabCompleter{
 						}
 					}
 				}
+			} else if(com.getName().equals("homes")) {
+				for(OfflinePlayer playerList : Bukkit.getOfflinePlayers()) {
+					list.add(playerList.getName());
+				}
+				
 			}
 		}
 		return list;

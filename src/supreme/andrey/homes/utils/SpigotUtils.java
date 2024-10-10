@@ -25,12 +25,12 @@ public class SpigotUtils {
 		player.spigot().sendMessage(t);
 	}
 	
-	public static void teleportInHomeMessage(Player player, String playerMessage, String homeString) {
+	public static void teleportInHomeMessage(Player player, String playerMessage, String homeString, String playerHome) {
 		TextComponent t = new TextComponent(playerMessage);
 		t.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Click here to teleport")));
 		SpigotCallback.createCommand(t, playerCb -> {
 
-			HomeTeleport.teleportPlayer(player, homeString, SupremeHomes.getPlugin(SupremeHomes.class), player.getName());
+			HomeTeleport.teleportPlayer(player, homeString, SupremeHomes.getPlugin(SupremeHomes.class), playerHome);
 			
 		});
 		player.spigot().sendMessage(t);

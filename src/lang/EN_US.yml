@@ -10,7 +10,9 @@ home:
  home_not_exists: "Home not exists"
  home_wait_teleport: "Wait your teleport has been done"
  homes_not_have_homes: "You not have any home, use the /sethome <home_name> to set a new home"
+ homes_player_not_has_public_homes: "Player {playerName} not has public homes"
  homes_your_homes: "&7Your homes: "
+ homes_player_homes: "&7{playerName} homes:"
  homes_home: "&9{home}" #Variables: {home}
  delhome_home_not_exists: "Home not exists"
  delhome_success: "Home {homeName} deleted" #Variables {homeName}

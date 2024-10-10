@@ -2,6 +2,7 @@ package supreme.andrey.homes.player.tools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -197,21 +198,48 @@ public class Home {
 		}
 	}
 	
-	public static void homes(Player player) {
-		Configuration config = new Configuration(plugin, "homes/", player.getName(), false);
-		Set<String> homes = config.getConfig().getKeys(false);
+	public static void homes(Player player, String args[]) {
+
+		Configuration config = new Configuration(plugin, "homes/", args.length == 0 ? player.getName() : args[0], false);
+		Set<String> bruteHomes = config.getConfig().getKeys(false);
+		Set<String> homes = new HashSet<String>();
+
+		if(args.length == 1) {
+			for(String home : bruteHomes)
+				if (config.getConfig().getBoolean(home + ".public"))
+					homes.add(home);
+					
+		} else homes = bruteHomes;
 		if(homes.isEmpty()) {
-			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_not_have_homes"));
+			if (args.length == 0)
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_not_have_homes"));
+			else {
+				String[] variables = {"{playerName}"};
+				String[] values = {args[0]};
+				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_player_not_has_public_homes", variables, values));
+			}
 			return;
 		}
-		player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_your_homes"));
+		
+		if (args.length == 0)
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_your_homes"));
+		else if (SupremeHomes.getLanguage().getHomeMessage("homes_player_homes") != null) {
+			String[] variables = {"{playerName}"};
+			String[] values = {args[0]};
+			player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_player_homes", variables, values));
+		}
+		else 
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Homes: "));
+		
 		for(String home : homes) {
+
 			String[] variables = {"{home}"};
 			String[] values = {home};
 			if (ClassUtils.classExists("net.md_5.bungee.api.chat.HoverEvent"))
-				SpigotUtils.teleportInHomeMessage(player, SupremeHomes.getLanguage().getHomeMessage("homes_home", variables, values), home);
+				SpigotUtils.teleportInHomeMessage(player, SupremeHomes.getLanguage().getHomeMessage("homes_home", variables, values), home, args.length == 0 ? player.getName() : args[0]);
 			else
 				player.sendMessage(SupremeHomes.getLanguage().getHomeMessage("homes_home", variables, values));
+			
 		}
 		SoundManager.playSoundHomes(player);
 			

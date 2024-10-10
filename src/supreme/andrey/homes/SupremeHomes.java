@@ -100,6 +100,7 @@ public class SupremeHomes extends JavaPlugin {
 			}
 		});
 		this.getCommand("homes").setExecutor(com);
+		this.getCommand("homes").setTabCompleter(tabComp);
 		this.getCommand("home").setExecutor(com);
 		this.getCommand("delhome").setExecutor(com);
 		this.getCommand("home").setTabCompleter(tabComp);
