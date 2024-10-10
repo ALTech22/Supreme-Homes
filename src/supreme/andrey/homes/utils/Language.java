@@ -34,6 +34,7 @@ public class Language {
 	}
 	public String getHomeMessage(String path) {
 		String message = langFile.getConfig().getString(home+"."+path);
+		if (message == null) return null;
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 	
