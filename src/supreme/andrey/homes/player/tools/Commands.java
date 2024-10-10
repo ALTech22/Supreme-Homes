@@ -15,7 +15,7 @@ public class Commands implements CommandExecutor{
 			if(com.getName().equals("sethome"))
 				Home.setHome(player, args);
 			else if(com.getName().equals("homes"))
-				Home.homes(player);
+				Home.homes(player, args);
 			else if(com.getName().equals("home"))
 				Home.home(player, args);
 			else if(com.getName().equals("delhome"))
